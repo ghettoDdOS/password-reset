@@ -32,7 +32,7 @@ def change_linux_password(
     return run_in_chroot(
         chroot,
         (
-            "usermod",
+            "/sbin/usermod",
             "--password",
             new_password,
             username,
