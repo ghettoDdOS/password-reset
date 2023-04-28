@@ -6,6 +6,7 @@ clean:
 
 .PHONY: build
 build:
+	@make clean
 	poetry run pyinstaller ./password_reset/main.py -F --specpath ./dist --distpath ./iso/airootfs/usr/local/bin/ --name password-reset
 	mkdir -p ./dist/iso
 	sudo mkarchiso -v -w ./build/iso -o ./dist/ iso/
