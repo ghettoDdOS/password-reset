@@ -3,5 +3,6 @@
     "btrfs",
     "FSTYPE",
     "MOUNTPOINTS",
+    "usermod"
   ]
 }
