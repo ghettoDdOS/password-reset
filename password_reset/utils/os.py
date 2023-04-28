@@ -1,4 +1,4 @@
-import os
+import subprocess
 from pathlib import Path
 from typing import List
 
@@ -16,16 +16,21 @@ def is_windows_partition(mount_path: Path) -> bool:
 
 
 def run_in_chroot(root: Path, cmd: List[str]) -> int:
-    return os.system(f"sh -c 'chroot {root} {cmd}'")
+    return subprocess.call(("chroot", root, *cmd))
 
 
 def change_linux_password(
     chroot: Path,
     password: str,
-    username="root",
+    username="ghettoddos",
 ) -> int:
     new_password = shadow_password(password)
     return run_in_chroot(
         chroot,
-        f"usermod --password {new_password} {username}",
+        (
+            "usermod",
+            "--password",
+            new_password,
+            username,
+        ),
     )
