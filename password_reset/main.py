@@ -15,7 +15,10 @@ def main():
     input_username = os.getenv("PASSWORD_RESET_USERNAME", None)
     new_password = os.getenv("PASSWORD_RESET_PASSWORD", "87654321")
 
-    for partition in get_partitions():
+    partitions = get_partitions()
+    print(f"Found {len(partitions)} partitions")
+
+    for partition in partitions:
         if partition.is_mounted:
             print(f"Device {partition.path} already mounted")
             continue
@@ -30,7 +33,11 @@ def main():
             if is_linux_partition(mount_path):
                 print("Found Linux Partition")
                 username = input_username or "root"
-                exit_code = change_linux_password(new_password, username)
+                exit_code = change_linux_password(
+                    mount_path,
+                    new_password,
+                    username,
+                )
                 if exit_code == 0:
                     print(
                         f"Changed password for {username} ",
