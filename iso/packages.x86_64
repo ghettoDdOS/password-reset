@@ -10,4 +10,6 @@ pv
 qemu-guest-agent
 syslinux
 virtualbox-guest-utils-nox
+bash
+chntpw
 python

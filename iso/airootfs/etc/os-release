@@ -1,4 +1,4 @@
-NAME="PASSWORD_RESET"
+NAME="PasswordReset"
 PRETTY_NAME="PasswordReset"
 ID=password-reset
 ID_LIKE=arch
