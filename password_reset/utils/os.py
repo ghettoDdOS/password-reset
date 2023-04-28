@@ -5,9 +5,13 @@ from typing import List
 from .crypt import shadow_password
 
 
-def is_linux_partition(mount_path: Path) -> bool:
+def is_linux_partition(mount_path: Path) -> (bool, bool):
     passwd_file = mount_path / "etc/passwd"
-    return passwd_file.is_file()
+    one_part_os_passwd_file = mount_path / "@/etc/passwd"
+    return (
+        passwd_file.is_file() or one_part_os_passwd_file.is_file(),
+        one_part_os_passwd_file.is_file(),
+    )
 
 
 def is_windows_partition(mount_path: Path) -> bool:

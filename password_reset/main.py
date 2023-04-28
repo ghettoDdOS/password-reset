@@ -29,12 +29,12 @@ def main():
         if partition.fs_type in UnixFSTypes:
             print(f"Device {partition.path} has Linux file system")
             mount_path = parted.mount(partition)
-
-            if is_linux_partition(mount_path):
+            is_linux, is_one_part = is_linux_partition(mount_path)
+            if is_linux:
                 print("Found Linux Partition")
                 username = input_username or "root"
                 exit_code = change_linux_password(
-                    mount_path,
+                    mount_path if not is_one_part else mount_path / "@",
                     new_password,
                     username,
                 )
