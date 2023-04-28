@@ -2,12 +2,13 @@ import os
 import subprocess
 import sys
 from pathlib import Path
+from typing import List, Optional
 
 from password_reset.schemes import Partition
 
 
 class Parted:
-    mounted_parts: list[Partition] = []
+    mounted_parts: List[Partition] = []
 
     def __init__(self, base=Path("/mnt/password-reset/")):
         self._base = base
@@ -39,7 +40,11 @@ class Parted:
 
         return mount_point
 
-    def umount(self, part: Partition, mount_path: Path | None = None) -> None:
+    def umount(
+        self,
+        part: Partition,
+        mount_path: Optional[Path] = None,
+    ) -> None:
         exit_code = subprocess.call(("umount", part.path))
 
         if mount_path is not None:

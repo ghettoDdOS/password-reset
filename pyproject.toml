@@ -4,11 +4,13 @@ version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
-packages = [{include = "password_reset"}]
+packages = [{ include = "password_reset" }]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.10,<3.12"
 
+[tool.poetry.group.dev.dependencies]
+pyinstaller = "^5.10.1"
 
 [build-system]
 requires = ["poetry-core"]

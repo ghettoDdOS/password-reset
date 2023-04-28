@@ -3,9 +3,10 @@ import subprocess
 from pathlib import Path
 
 from password_reset.schemes import Partition
+from typing import List
 
 
-def _lsblk() -> list[str]:
+def _lsblk() -> List[str]:
     cmd = (
         "lsblk",
         "-Pnpo",
@@ -15,10 +16,10 @@ def _lsblk() -> list[str]:
     return subprocess.check_output(cmd).decode("utf-8").splitlines()
 
 
-def get_partitions() -> list[Partition]:
+def get_partitions() -> List[Partition]:
     pattern = r'NAME="(.*?)" FSTYPE="(.*?)" MOUNTPOINTS="(.*?)"'
 
-    partitions: list[Partition] = []
+    partitions: List[Partition] = []
 
     for line in _lsblk():
         if "part" not in line:

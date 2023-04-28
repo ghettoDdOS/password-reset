@@ -7,6 +7,10 @@ def main():
     parted = Parted()
 
     for partition in get_partitions():
+        if partition.is_mounted:
+            print(f"Device {partition.path} already mounted")
+            continue
+
         if partition.fs_type in UnixFSTypes:
             print(f"Device {partition.path} has Linux file system")
             mount_path = parted.mount(partition)
@@ -27,3 +31,7 @@ def main():
             parted.umount(partition, mount_path)
         else:
             print(f"Device {partition.path} has unsupported file system")
+
+
+if __name__ == "__main__":
+    main()
