@@ -6,10 +6,10 @@ clean:
 
 .PHONY: build
 build:
-	poetry run pyinstaller ./password_reset/main.py -F --specpath ./dist --distpath ./iso/airootfs/usr/local/bin/ --name password_reset
+	poetry run pyinstaller ./password_reset/main.py -F --specpath ./dist --distpath ./iso/airootfs/usr/local/bin/ --name password-reset
 	mkdir -p ./dist/iso
-	sudo mkarchiso -v -w ./build/iso -o ./dist/iso iso/
+	sudo mkarchiso -v -w ./build/iso -o ./dist/ iso/
 
 .PHONY: run
 run:
-	run_archiso -u -i ./dist/iso/*
+	run_archiso -u -i ./dist/*.iso

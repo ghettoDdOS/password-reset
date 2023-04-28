@@ -1,1 +1,1 @@
-sudo /usr/bin/password_reset
+sudo /usr/local/bin/password-reset
