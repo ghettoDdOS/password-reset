@@ -1,9 +1,10 @@
 import re
 import subprocess
 from pathlib import Path
-
-from password_reset.schemes import Partition
 from typing import List
+
+from password_reset.enums import FSType
+from password_reset.schemes import Partition
 
 
 def _lsblk() -> List[str]:
@@ -29,7 +30,7 @@ def get_partitions() -> List[Partition]:
         partitions.append(
             Partition(
                 path=Path(path),
-                fs_type=fs_type,
+                fs_type=FSType(fs_type),
                 is_mounted=bool(is_mounted),
             )
         )

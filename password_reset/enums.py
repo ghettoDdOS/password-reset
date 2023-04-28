@@ -6,6 +6,11 @@ class FSType(str, Enum):
     EXT4 = "ext4"
     NTFS = "ntfs"
     BTRFS = "btrfs"
+    UNKNOWN = "unknown"
+
+    @classmethod
+    def _missing_(cls, value):
+        return cls.UNKNOWN
 
 
 class SystemType(str, Enum):
