@@ -2,9 +2,9 @@
 # shellcheck disable=SC2034
 
 iso_name="password-reset"
-iso_label="PASSWORD_RESET$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y%m)"
-iso_publisher="ghettoDdOS <https://github.com/ghettoDdOS/>"
-iso_application="PasswordReset"
+iso_label="PASSWORD_RESET_$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y%m)"
+iso_publisher="ghettoDdOS <https://github.com/ghettoDdOS>"
+iso_application="Password reset Live/Rescue CD"
 iso_version="$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y.%m.%d)"
 install_dir="arch"
 buildmodes=('iso')
@@ -13,10 +13,14 @@ bootmodes=('bios.syslinux.mbr' 'bios.syslinux.eltorito'
            'uefi-ia32.grub.eltorito' 'uefi-x64.grub.eltorito')
 arch="x86_64"
 pacman_conf="pacman.conf"
-airootfs_image_type="erofs"
-airootfs_image_tool_options=('-zlzma,9' -E ztailpacking)
+airootfs_image_type="squashfs"
+airootfs_image_tool_options=('-comp' 'xz' '-Xbcj' 'x86' '-b' '1M' '-Xdict-size' '1M')
 file_permissions=(
-  ["/etc/shadow"]="0:0:0400"
-  ["/etc/gshadow"]="0:0:0400"
-  ["/usr/local/bin/password_reset"]="0:0:755"
+  ["/etc/shadow"]="0:0:400"
+  ["/root"]="0:0:750"
+  ["/root/.automated_script.sh"]="0:0:755"
+  ["/usr/local/bin/choose-mirror"]="0:0:755"
+  ["/usr/local/bin/Installation_guide"]="0:0:755"
+  ["/usr/local/bin/livecd-sound"]="0:0:755"
+  ["/usr/local/bin/password-reset"]="0:0:755"
 )
