@@ -5,4 +5,4 @@ fi
 
 ~/.automated_script.sh
 password-reset
-shutdown -n now
+shutdown now

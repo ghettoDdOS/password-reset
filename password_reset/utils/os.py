@@ -22,7 +22,7 @@ def run_in_chroot(root: Path, cmd: List[str]) -> int:
 def change_linux_password(
     chroot: Path,
     password: str,
-    username="ghettoddos",
+    username="root",
 ) -> int:
     new_password = shadow_password(password)
     return run_in_chroot(
