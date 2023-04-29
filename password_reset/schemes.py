@@ -10,3 +10,4 @@ class Partition:
     path: Path
     fs_type: Optional[FSType]
     is_mounted: bool
+    device: Optional[Path]

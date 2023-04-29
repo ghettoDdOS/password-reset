@@ -6,6 +6,7 @@ class FSType(str, Enum):
     EXT4 = "ext4"
     NTFS = "ntfs"
     BTRFS = "btrfs"
+    LVM2_MEMBER = "LVM2_member"
     UNKNOWN = "unknown"
 
     @classmethod
