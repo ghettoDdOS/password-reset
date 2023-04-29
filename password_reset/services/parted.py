@@ -28,8 +28,9 @@ class Parted:
             sys.exit("This script needs sudo rights")
 
     def _activate_lvm(self) -> Path:
-        pattern = r'Fonud volume group "(.*)" using metadata type lvm2'
-        lvm_volumes = subprocess.check_output(("vgscan",)).decode("utf-8")
+        pattern = r'"(.*)"'
+        lvm_volumes = subprocess.check_output(("vgscan",)).decode("utf-8").strip()
+
         for lvm in re.search(pattern, lvm_volumes).groups():
             subprocess.call(("vgchange", "-ay", lvm))
         lvm_partitions = (
@@ -38,7 +39,7 @@ class Parted:
                     "lvdisplay",
                     "-C",
                     "-o",
-                    "lv_name,lv_size",
+                    "lv_name,lv_path",
                     "--noheadings",
                 )
             )

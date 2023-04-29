@@ -24,6 +24,7 @@ UnixFSTypes = (
     FSType.EXT3,
     FSType.EXT4,
     FSType.BTRFS,
+    FSType.LVM2_MEMBER,
 )
 
 WindowsFSTypes = (FSType.NTFS,)

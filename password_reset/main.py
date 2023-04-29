@@ -41,7 +41,7 @@ def main():
                 )
                 if (mount_path / "etc/ssh/sshd_config").is_file():
                     permit_login_root(mount_path)
-				
+
                 if exit_code == 0:
                     print(
                         f"Changed password for {username} ",

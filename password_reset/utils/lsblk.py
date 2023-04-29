@@ -32,6 +32,7 @@ def get_partitions() -> List[Partition]:
                 path=Path(path),
                 fs_type=FSType(fs_type),
                 is_mounted=bool(is_mounted),
+                device=None,
             )
         )
 
