@@ -29,6 +29,12 @@ def change_linux_password(
     username="root",
 ) -> int:
     new_password = shadow_password(password)
+    subprocess.call(
+        (
+            "touch",
+            chroot / "autorelabel",
+        )
+    )
     return run_in_chroot(
         chroot,
         (
@@ -38,6 +44,7 @@ def change_linux_password(
             username,
         ),
     )
+
 
 def permit_login_root(chroot: Path) -> None:
     run_in_chroot(
