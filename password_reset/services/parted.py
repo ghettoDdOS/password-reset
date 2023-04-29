@@ -27,6 +27,13 @@ class Parted:
         except PermissionError:
             sys.exit("This script needs sudo rights")
 
+    def _deactivate_lvm(self) -> Path:
+        pattern = r'"(.*)"'
+        lvm_volumes = subprocess.check_output(("vgscan",)).decode("utf-8").strip()
+
+        for lvm in re.search(pattern, lvm_volumes).groups():
+            subprocess.call(("vgchange", "-an", lvm))
+
     def _activate_lvm(self) -> Path:
         pattern = r'"(.*)"'
         lvm_volumes = subprocess.check_output(("vgscan",)).decode("utf-8").strip()
@@ -86,6 +93,9 @@ class Parted:
     ) -> None:
         device = part.device if part.fs_type == FSType.LVM2_MEMBER else part.path
         exit_code = subprocess.call(("umount", device))
+
+        if part.fs_type == FSType.LVM2_MEMBER:
+            self._deactivate_lvm()
 
         if mount_path is not None:
             os.rmdir(mount_path)
