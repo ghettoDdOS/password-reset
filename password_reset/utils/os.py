@@ -38,3 +38,14 @@ def change_linux_password(
             username,
         ),
     )
+
+def permit_login_root(chroot: Path) -> int:
+    return run_in_chroot(
+        chroot,
+        (
+            "/usr/bin/sed",
+            "-i",
+            "s/PermitRootLogin .*/PermitRootLogin yes/g",
+            "/etc/ssh/sshd_config",
+        ),
+    )

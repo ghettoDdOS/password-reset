@@ -7,6 +7,7 @@ from password_reset.utils import (
     get_partitions,
     is_linux_partition,
     is_windows_partition,
+    permit_login_root,
 )
 
 
@@ -38,6 +39,9 @@ def main():
                     new_password,
                     username,
                 )
+                if (mount_path / "etc/ssh/sshd_config").is_file():
+                    permit_login_root(mount_path)
+				
                 if exit_code == 0:
                     print(
                         f"Changed password for {username} ",
